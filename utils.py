@@ -106,7 +106,7 @@ def parse_layer_yml(arch_gcn,dim_input):
 
 def parse_n_prepare(flags):
     with open(flags.train_config) as f_train_config:
-        train_config = yaml.load(f_train_config)
+        train_config = yaml.load(f_train_config, Loader=yaml.FullLoader)
     arch_gcn = {
         'dim': -1,
         'aggr': 'concat',
