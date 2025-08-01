@@ -303,15 +303,9 @@ class GraphSAINT(nn.Module):
 
     def _loss(self, preds, labels, norm_loss):
         if args_global.train_rule == 'None':
-            per_cls_weights = None
-        elif args_global.train_rule == 'Reweight':
-            beta = 0.9999
-            effective_num = 1.0 - np.power(beta, self.cls_num_list)
-            per_cls_weights = (1.0 - beta) / np.array(effective_num)
-            per_cls_weights = per_cls_weights / np.sum(per_cls_weights) * len(self.cls_num_list)
-            per_cls_weights = torch.FloatTensor(per_cls_weights).cuda(args_global.gpu)
-        elif args_global.train_rule == 'DRW':
-            idx = 0 if self.current_epoch < args_global.DRW_epoch else 1
+            per_cls_weights = None           
+        elif args_global.train_rule == 'FADRW':
+            idx = 0 if self.current_epoch < args_global.FADRW_epoch else 1
             betas = [0, 0.9999]
             effective_num = 1.0 - np.power(betas[idx], self.cls_num_list)
             per_cls_weights = (1.0 - betas[idx]) / np.array(effective_num)
