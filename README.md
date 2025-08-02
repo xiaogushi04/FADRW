@@ -27,13 +27,13 @@ python setup.py build_ext --inplace
 ### baseline
 
 ```
-python main.py --data_prefix ${relative_data_dir} --train_config ./train_config/no_graph.yml --no_graph --repeat_time 1 
-```
-
-### using context information
-
-```
 python main.py --data_prefix ${relative_data_dir} --train_config ./train_config/gat_192_8_with_graph.yml --repeat_time 1
+```
+
+### using FADRW
+
+```
+python main.py --data_prefix ${relative_data_dir} --train_config ./train_config/gat_192_8_with_graph.yml --repeat_time 1 --train_rule FADRW --loss_type FADRW
 ```
 
 ### relative_data_dir
